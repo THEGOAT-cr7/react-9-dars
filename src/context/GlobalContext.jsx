@@ -54,7 +54,7 @@ const reducer = (state, action) => {
     case "LOGIN":
       return {
         ...state,
-        user: state.userData,
+        user: payload,
       };
     case "LOGOUT":
       return {
@@ -72,12 +72,14 @@ export const GlobalContextProvider = ({ children }) => {
     totalPrice: 0,
     totalAmount: 0,
     user: null,
-    userData: {
-      displayName: "asadbek",
-      email: "qw@a",
-      password: "1212",
-      photoURL: "https://picsum.photos/200/300",
-    },
+    usersData: [
+      {
+        displayName: "asadbek",
+        email: "qw@a",
+        password: "1212",
+        photoURL: "https://picsum.photos/200/300",
+      },
+    ],
   });
 
   useEffect(() => {

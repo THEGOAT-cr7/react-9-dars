@@ -1,9 +1,9 @@
 import { useContext } from "react";
 import { GlobalContext } from "../context/GlobalContext";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 function Login() {
-  const { userData, dispatch } = useContext(GlobalContext);
+  const { usersData, dispatch } = useContext(GlobalContext);
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -12,9 +12,15 @@ function Login() {
     const email = formData.get("email");
     const password = formData.get("password");
 
-    if (userData.email === email && userData.password === password) {
-      dispatch({ type: "LOGIN" });
+    const user = usersData.find(
+      (u) => u.email === email && u.password === password
+    );
+
+    if (user) {
+      dispatch({ type: "LOGIN", payload: user });
       navigate("/");
+    } else {
+      alert("Incorrect email or password");
     }
   };
 
@@ -30,7 +36,7 @@ function Login() {
                 name="email"
                 type="email"
                 className="input"
-                placeholder="Type here..."
+                placeholder="qw@a"
               />
             </fieldset>
             <fieldset className="fieldset">
@@ -39,11 +45,14 @@ function Login() {
                 name="password"
                 type="password"
                 className="input"
-                placeholder="Type here..."
+                placeholder="1212"
               />
             </fieldset>
-            <div className="my-5 ">
+            <div className="!my-5 flex items-center gap-5">
               <button className="btn btn-primary !bg-[#1D232A]">Login</button>
+              <NavLink to='/signup'>
+                <p>Signup</p>
+              </NavLink>
             </div>
           </form>
         </div>
