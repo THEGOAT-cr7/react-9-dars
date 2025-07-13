@@ -1,18 +1,23 @@
 import { useContext } from "react";
 import { GlobalContext } from "../context/GlobalContext";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const { userData, dispatch } = useContext(GlobalContext);
+  const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const email = formData.get("email");
     const password = formData.get("password");
 
-    if (userData.email == email && userData.password == password) {
+    if (userData.email === email && userData.password === password) {
       dispatch({ type: "LOGIN" });
+      navigate("/");
     }
   };
+
   return (
     <section>
       <div>

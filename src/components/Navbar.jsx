@@ -3,7 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import { useGlobalContext } from "../hooks/useGlobalContext";
 
 function Navbar() {
-  const { totalAmount, cart, dispatch } = useGlobalContext();
+  const { totalAmount, cart, dispatch, user } = useGlobalContext();
   return (
     <header>
       
@@ -62,6 +62,11 @@ function Navbar() {
               )}
             </div>
           </div>
+          {user && <div className="flex items-center gap-2">
+              <img src={user.photoURL} className="rounded-full w-10 h-10" alt="" />
+              <p className="text-black">{user.displayName}</p>
+            </div>}
+          <button className="btn btn-secondary !bg-red-500" onClick={() => dispatch({type: "LOGOUT"})}>Logout</button>
         </nav>
       </div>
     </header>

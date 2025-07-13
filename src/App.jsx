@@ -6,19 +6,15 @@ import {
 import MainLayout from "./layout/MainLayout";
 import Contact from "./pages/Contact";
 import Home from "./pages/Home";
-
 import { ProtectedRoutes } from "./components/ProtectedRoutes";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import { useContext } from "react";
+import { GlobalContext } from "./context/GlobalContext";
 
 function App() {
-  const user = null;
-  const userData = {
-    displayName: "asadbek",
-    email: "qw@gmail.com",
-    password: "password123",
-    photoURL: "https://picsum.photos/200/300",
-  };
+  const { user } = useContext(GlobalContext);
+
   const routes = createBrowserRouter([
     {
       path: "/",
@@ -47,6 +43,7 @@ function App() {
       element: user ? <Navigate to="/" /> : <Signup />,
     },
   ]);
+
   return <RouterProvider router={routes} />;
 }
 
